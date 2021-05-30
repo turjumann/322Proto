@@ -22,7 +22,7 @@ export default LoadingScreen = () => {
                 const userInfo = await firebase.getUserInfo(user.uid)
 
                 setUser({
-                    isLoggedIn: true,
+                    isLoggedIn: false,
                     email: userInfo.email,
                     name: userInfo.name,
                     surname: userInfo.surname,
