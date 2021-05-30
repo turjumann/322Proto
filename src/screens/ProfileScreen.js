@@ -1,11 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components'
-import {ScrollView, View, KeyboardAvoidingView, TextInput } from 'react-native'
+import {ScrollView, View, KeyboardAvoidingView, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { UserContext } from '../context/UserContext'
 import { FirebaseContext } from '../context/FirebaseContext'
 import Text from '../components/Text'
 
 
+
+const DissmissKeyboard = ({children}) => (
+    <TouchableWithoutFeedback onPress = {() => Keyboard.dismiss()}>
+        {children}
+        </TouchableWithoutFeedback>
+)
 
 
 export default ProfileScreen = () => {
@@ -28,6 +34,8 @@ export default ProfileScreen = () => {
     
 
     return (
+
+        <DissmissKeyboard>
         <Container>
             <ProfilePhotoContainer>
                 <ProfilePhoto source ={ 
@@ -45,8 +53,8 @@ export default ProfileScreen = () => {
                         <ProfileInfoContainer>
                         <ProfileTitle>Name</ProfileTitle>
                             <ProfileField   
-                                value={userData ? userData.name : user.name}
-                                
+                                value={userData ? userData.name : ''}
+                                placeholder = {user.name}
                                 placeholderTextColor="#646464"
                                 onChangeText={(txt) => setUserData({...userData, name: txt})}
                             />
@@ -54,53 +62,55 @@ export default ProfileScreen = () => {
 
                         <ProfileInfoContainer>
                         <ProfileTitle>Surname</ProfileTitle>
-                            <ProfileField value={userData ? userData.surname : user.surname}
-                            
-                            placeholderTextColor="#646464"
+                            <ProfileField value={userData ? userData.surname : ''}
+                                placeholder = {user.surname}
+                                placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, surname: txt})}
                                 />
                         </ProfileInfoContainer>
 
                         <ProfileInfoContainer>
                         <ProfileTitle>Age</ProfileTitle>
-                            <ProfileField value={userData ? userData.age : user.age}
-                            
-                            placeholderTextColor="#646464"
+                            <ProfileField value={userData ? userData.age : ''}
+                                placeholder = {user.age}
+                                placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, age: txt})}
                                 />
                         </ProfileInfoContainer>
 
                         <ProfileInfoContainer>
                         <ProfileTitle>Previous Institution</ProfileTitle>
-                            <ProfileField value={userData ? userData.prevInst : user.prevInst}
-                            
-                            placeholderTextColor="#646464"
+                            <ProfileField value={userData ? userData.prevInst : ''}
+                                placeholder = {user.prevInst}
+                                placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, prevInst: txt})}
                                 />
                         </ProfileInfoContainer>
 
                         <ProfileInfoContainer>
                         <ProfileTitle>Country</ProfileTitle>
-                            <ProfileField value={userData ? userData.country : user.country}
-                            
-                            placeholderTextColor="#646464"
+                            <ProfileField value={userData ? userData.country : ''}
+                                placeholder = {user.country}
+                                placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, country: txt})}
                                 />
                         </ProfileInfoContainer>
 
-
-
                 </ProfileInfo>
+
             </ScrollView>
+
             </View>
+
             <UpdateProfileContainer onPress = {updatez}>
                
                 <Text bold center color = '#ffffff'>Update</Text>
-              
-               
            </UpdateProfileContainer>
-            
+
         </Container>
+
+        </DissmissKeyboard>
+        
     )
 }
 
