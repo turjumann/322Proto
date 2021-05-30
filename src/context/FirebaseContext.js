@@ -1,9 +1,10 @@
-import React, {createContext} from 'react'
+import React, {createContext, useEffect } from 'react'
 
 import firebase from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import config from '../config/firebase'
+import { Alert } from 'react-native'
 
 
 const FirebaseContext = createContext();
@@ -105,15 +106,10 @@ const Firebase = {
         
         try {
             const user = await db.collection('users').doc(uid).get()
-
             if(user.exists) {
-
                 return user.data()
-
             }
-
         } catch (error) {
-
             console.log('Error @getUserInfo', error)
         }
     },
@@ -135,14 +131,19 @@ const Firebase = {
                
                
                 }).then(() => {
-            console.log('Profile Successfully Edited!')})
+            console.log('Profile Successfully Edited!')},
+            Alert.alert(
+                'Profile Successfully Updated!'))
 
 
         } catch (error) {
 
-            console.log('Error @updateUser', error)
+            console.log('Error @updateUser', error),
+            Alert.alert('Error, Please fill all the fields')
         }
     },
+
+    
 
 }
 

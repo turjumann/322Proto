@@ -20,21 +20,20 @@ export default ProfileScreen = () => {
     const firebase = useContext(FirebaseContext)
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(false);
-
     const uid = firebase.getCurrentUser().uid
-
 
 
 
     const updatez = async (uid) => {
         const updated = await firebase.updateUser(uid, userData)
-
     }
-    
-    
+
+    useEffect(() => {
+        firebase.getUserInfo();
+      }, [])
+
 
     return (
-
         <DissmissKeyboard>
         <Container>
             <ProfilePhotoContainer>
@@ -45,7 +44,7 @@ export default ProfileScreen = () => {
                     } />
             </ProfilePhotoContainer>
             <Text medium bold center margin ='16px 0 32px 0'>
-                {user.name}<Text medium center bold margin ='16px 0 32px 0'> {user.surname}</Text>
+                {userData ? userData.name : user.name}<Text medium center bold margin ='16px 0 32px 0'>{userData ? userData.surname : user.surname}</Text>
             </Text>
             <View style={{height: 300}} >
             <ScrollView>
@@ -102,7 +101,7 @@ export default ProfileScreen = () => {
 
             </View>
 
-            <UpdateProfileContainer onPress = {updatez}>
+            <UpdateProfileContainer onPress = {(updatez)}>
                
                 <Text bold center color = '#ffffff'>Update</Text>
            </UpdateProfileContainer>
@@ -113,6 +112,7 @@ export default ProfileScreen = () => {
         
     )
 }
+
 
 
 const Container = styled.View`
