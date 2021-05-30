@@ -46,7 +46,7 @@ export default ProfileScreen = () => {
                         <ProfileTitle>Name</ProfileTitle>
                             <ProfileField   
                                 value={userData ? userData.name : user.name}
-                                placeholder = {user.name}
+                                
                                 placeholderTextColor="#646464"
                                 onChangeText={(txt) => setUserData({...userData, name: txt})}
                             />
@@ -55,7 +55,7 @@ export default ProfileScreen = () => {
                         <ProfileInfoContainer>
                         <ProfileTitle>Surname</ProfileTitle>
                             <ProfileField value={userData ? userData.surname : user.surname}
-                            placeholder = {user.surname}
+                            
                             placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, surname: txt})}
                                 />
@@ -64,7 +64,7 @@ export default ProfileScreen = () => {
                         <ProfileInfoContainer>
                         <ProfileTitle>Age</ProfileTitle>
                             <ProfileField value={userData ? userData.age : user.age}
-                            placeholder = {user.age}
+                            
                             placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, age: txt})}
                                 />
@@ -73,7 +73,7 @@ export default ProfileScreen = () => {
                         <ProfileInfoContainer>
                         <ProfileTitle>Previous Institution</ProfileTitle>
                             <ProfileField value={userData ? userData.prevInst : user.prevInst}
-                            placeholder = {user.prevInst}
+                            
                             placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, prevInst: txt})}
                                 />
@@ -82,7 +82,7 @@ export default ProfileScreen = () => {
                         <ProfileInfoContainer>
                         <ProfileTitle>Country</ProfileTitle>
                             <ProfileField value={userData ? userData.country : user.country}
-                            placeholder = {user.country}
+                            
                             placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, country: txt})}
                                 />
