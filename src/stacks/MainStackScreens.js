@@ -14,10 +14,13 @@ export default MainStackScreens = () => {
     const MainStack = createBottomTabNavigator()
 
     const tabBarOptions = {
-        showLabel: false,
+        showLabel: true,
+        activeTintColor: '#ffffff',
         style: {
             backgroundColor: '#222222',
-            paddingBottom: 12
+            paddingBottom: 12,
+            
+            
         }
     }
     const screenOptions = (({route}) => ({
@@ -30,9 +33,6 @@ export default MainStackScreens = () => {
                     break
                 case 'Profile':
                     iconName = 'ios-person'
-                    break
-                case 'Home':
-                    iconName = 'ios-home'
                     break
                 case 'Message':
                     iconName = 'ios-chatboxes'

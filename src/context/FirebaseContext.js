@@ -1,4 +1,5 @@
-import React, {createContext, useEffect } from 'react'
+import React, {createContext } from 'react'
+
 
 import firebase from 'firebase'
 import 'firebase/auth'
@@ -40,19 +41,21 @@ const Firebase = {
                 country: user.country,
                 email: user.email,
                 profilePhotoUrl
-
+                
             })
 
+            
             if (user.profilePhoto) {
                 profilePhotoUrl = await Firebase.uploadProfilePhoto(user.profilePhoto)
             }
 
             delete user.password
-
-            return {...user, profilePhotoUrl, uid}
+                return {...user, profilePhotoUrl, uid}
+            
 
         } catch(error){
-
+            Alert.alert(error.message)
+            setUser((state) => ({...state, isLoggedIn: false}))
             console.log('Error @createUser: ', error.message)
         }
 
@@ -142,6 +145,26 @@ const Firebase = {
             Alert.alert('Error, Please fill all the fields')
         }
     },
+
+    logOut: async () => {
+        try{
+            await firebase.auth().signOut()
+
+            
+            
+            return true
+            
+        } catch(error) {
+            Alert.alert(error.message)
+            console.log('Error @logOut', error)
+        }
+        return false
+    },
+
+
+    logIn: async (email, password) => {
+        return firebase.auth().signInWithEmailAndPassword(email, password)
+    }
 
     
 

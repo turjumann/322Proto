@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components'
-import {ScrollView, View, KeyboardAvoidingView, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import {ScrollView, View, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard } from 'react-native'
 import { UserContext } from '../context/UserContext'
 import { FirebaseContext } from '../context/FirebaseContext'
 import Text from '../components/Text'
@@ -39,16 +39,17 @@ export default ProfileScreen = () => {
             <ProfilePhotoContainer>
                 <ProfilePhoto source ={ 
                     user.ProfilePhotoUrl === 'default'
-                    ? require('../../assets/defaultProfilePhoto.png')
+                    ? require('../../assets/images/logo.png')
                     : { uri: user.profilePhotoUrl }
                     } />
             </ProfilePhotoContainer>
             <Text medium bold center margin ='16px 0 32px 0'>
                 {userData ? userData.name : user.name}<Text medium center bold margin ='16px 0 32px 0'>{userData ? userData.surname : user.surname}</Text>
             </Text>
-            <View style={{height: 300}} >
+            <View style={{height: 250}} >
             <ScrollView>
                 <ProfileInfo>
+                
                         <ProfileInfoContainer>
                         <ProfileTitle>Name</ProfileTitle>
                             <ProfileField   
@@ -85,27 +86,31 @@ export default ProfileScreen = () => {
                             onChangeText={(txt) => setUserData({...userData, prevInst: txt})}
                                 />
                         </ProfileInfoContainer>
-
+                        <KeyboardAvoidingView style={{ flex: 1, justifyContent: 'center' }} keyboardVerticalOffset={75} behavior={"padding"}>
                         <ProfileInfoContainer>
+                        
                         <ProfileTitle>Country</ProfileTitle>
                             <ProfileField value={userData ? userData.country : ''}
                                 placeholder = {user.country}
                                 placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, country: txt})}
                                 />
+                                
                         </ProfileInfoContainer>
-
+                        </KeyboardAvoidingView>
+                        
                 </ProfileInfo>
 
             </ScrollView>
+            
 
             </View>
-
+            
             <UpdateProfileContainer onPress = {(updatez)}>
                
                 <Text bold center color = '#ffffff'>Update</Text>
            </UpdateProfileContainer>
-
+            
         </Container>
 
         </DissmissKeyboard>
@@ -125,14 +130,14 @@ const ProfilePhotoContainer = styled.View`
     shadow-radius: 30px;
     shadow-color: #222222;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 30px;
 
 `
 
 
 const ProfilePhoto = styled.Image`
-    width: 128px;
-    height: 128px;
+    width: 110px;
+    height: 110px;
     border-radius: 64px;
 
 `
@@ -158,7 +163,7 @@ const ProfileTitle = styled(Text)`
 const ProfileField = styled.TextInput`
     border-bottom-color: #8E93A1; 
     border-bottom-width: 0.5px;
-    height: 30px;
+    height: 32px;
 `;
 
 
@@ -168,7 +173,8 @@ const UpdateProfileContainer = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
     background-color: #222222;
-    border-radius: 6px;
+    border-radius: 24px;
+    margin-top: 75px
 `;
 
 const Loading = styled.ActivityIndicator.attrs(props => ({

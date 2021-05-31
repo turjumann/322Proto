@@ -1,14 +1,57 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { Alert } from 'react-native'
 import styled from 'styled-components'
 import Text from '../components/Text'
+import { FirebaseContext } from '../context/FirebaseContext'
+import { UserContext } from '../context/UserContext'
+import { TouchableWithoutFeedback, Keyboard } from 'react-native'
 
+
+const DissmissKeyboard = ({children}) => (
+    <TouchableWithoutFeedback onPress = {() => Keyboard.dismiss()}>
+        {children}
+        </TouchableWithoutFeedback>
+)
 
 export default function LoginScreen({navigation})  {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [loading, setLoading] = useState(false);
+    const firebase = useContext(FirebaseContext)
+    const [_,setUser] = useContext(UserContext)
 
+    const logIn = async () => {
+        setLoading(true)
+
+        try{
+            await firebase.logIn(email, password)
+
+            const uid = firebase.getCurrentUser().uid
+
+            const userInfo = await firebase.getUserInfo(uid)
+            
+            setUser({
+                name: userInfo.name,
+                surname: userInfo.surname,
+                age: userInfo.age,
+                prevInst: userInfo.prevInst,
+                country: userInfo.country,
+                email: userInfo.email,
+                uid,
+                isLoggedIn: true,
+                profilePhotoUrl: userInfo.profilePhotoUrl,
+            })
+
+        }catch(error) {
+            Alert.alert(error.message)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
     return (
+
+        <DissmissKeyboard>
        <Container>
            <Main>
                <Text title semi center>
@@ -43,7 +86,7 @@ export default function LoginScreen({navigation})  {
                    />
                </AuthContainer>
            </Auth>
-           <LoginContainer disabled = {loading}>
+           <LoginContainer onPress = {logIn} disabled = {loading}>
                {loading ? (
                    <Loading />
                ) : (
@@ -63,6 +106,7 @@ export default function LoginScreen({navigation})  {
 
             <StatusBar barStyle = 'light-content' />
        </Container>
+       </DissmissKeyboard>
     )
 }
 

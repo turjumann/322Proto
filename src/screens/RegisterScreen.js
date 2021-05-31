@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import {ScrollView, View, KeyboardAvoidingView, Platform} from 'react-native'
+import {ScrollView, View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform} from 'react-native'
 import styled from 'styled-components'
 import Text from '../components/Text'
 import {AntDesign} from '@expo/vector-icons'
@@ -25,6 +25,12 @@ export default function RegisterScreen({navigation})  {
     const firebase = useContext(FirebaseContext)
     const [_, setUser] = useContext(UserContext)
     
+
+    const DissmissKeyboard = ({children}) => (
+        <TouchableWithoutFeedback onPress = {() => Keyboard.dismiss()}>
+            {children}
+            </TouchableWithoutFeedback>
+    )
 
     const getPermissions = async () => {
         if (Platform.OS !== 'web') {
@@ -66,17 +72,20 @@ export default function RegisterScreen({navigation})  {
     const signUp = async () => {
         setLoading(true)
 
+        
         const user = {name, surname, age, prevInst, country, email, password, profilePhoto}
 
         console.log(name, surname, age, prevInst, country, email, password)
         try{
-            
             const createdUser = await firebase.createUser(user)
+                     
+          
+                
+                setUser({ ...createdUser, isLoggedIn: true })
+         
+
             
-
-            setUser({ ...createdUser, isLoggedIn: true })
         } catch(error) {
-
             console.log('Error: @signUp:', error)
         } finally {
 
@@ -85,7 +94,7 @@ export default function RegisterScreen({navigation})  {
     }
 
     return (
-        
+        <DissmissKeyboard>
        <Container>
            <Main>
                <Text title semi center>
@@ -216,6 +225,7 @@ export default function RegisterScreen({navigation})  {
 
             <StatusBar barStyle = 'light-content' />
        </Container>
+       </DissmissKeyboard>
     )
 }
 
