@@ -36,7 +36,7 @@ export default LoadingScreen = () => {
                 setUser(state => ({...state, isLoggedIn: false}))
             }
 
-        }, 3000)
+        }, 1000)
     }, [])
 
     return (

@@ -73,6 +73,7 @@ export default ProfileScreen = () => {
                         <ProfileTitle>Age</ProfileTitle>
                             <ProfileField value={userData ? userData.age : ''}
                                 placeholder = {user.age}
+                                keyboardType='numeric'
                                 placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, age: txt})}
                                 />
