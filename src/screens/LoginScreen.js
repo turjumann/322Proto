@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Text from '../components/Text'
 import { FirebaseContext } from '../context/FirebaseContext'
 import { UserContext } from '../context/UserContext'
-import { TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { TouchableWithoutFeedback, Keyboard, View } from 'react-native'
 
 
 const DissmissKeyboard = ({children}) => (
@@ -86,6 +86,8 @@ export default function LoginScreen({navigation})  {
                    />
                </AuthContainer>
            </Auth>
+
+           <View style = {{paddingTop: 20}}>
            <LoginContainer onPress = {logIn} disabled = {loading}>
                {loading ? (
                    <Loading />
@@ -94,11 +96,11 @@ export default function LoginScreen({navigation})  {
                )}
                
            </LoginContainer>
-
+           
             <RegisterContainer onPress = {() => navigation.navigate("Register")}>
                 <Text small bold center>First time here?<Text bold color = '#932432'>Register</Text></Text>
             </RegisterContainer>
-
+            </View>
             <HeaderGraphic>
                 <RightCircle />
                 <LeftCircle />
@@ -116,15 +118,15 @@ const Container = styled.View`
 `;
 
 const Main = styled.View`
-    margin-top: 192px;
+    margin-top: 200px;
 
 `;
 const Auth = styled.View`
-    margin: 64px 32px 32px;
+    margin: 50px 32px 32px;
 `;
 
 const AuthContainer = styled.View`
-    margin-bottom: 32px;
+    margin-bottom: 15px;
 `;
 
 const AuthTitle = styled(Text)`
@@ -138,7 +140,7 @@ const AuthTitle = styled(Text)`
 const AuthField = styled.TextInput`
     border-bottom-color: #8E93A1; 
     border-bottom-width: 0.5px;
-    height: 48px;
+    height: 40px;
 `;
 
 const LoginContainer = styled.TouchableOpacity`
@@ -148,6 +150,7 @@ const LoginContainer = styled.TouchableOpacity`
     justify-content: center;
     background-color: #222222;
     border-radius: 6px;
+    
 `;
 
 const Loading = styled.ActivityIndicator.attrs(props => ({

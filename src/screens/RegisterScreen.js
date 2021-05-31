@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import {ScrollView, View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform} from 'react-native'
+import {ScrollView, View, Keyboard, KeyboardAvoidingView, Platform} from 'react-native'
 import styled from 'styled-components'
 import Text from '../components/Text'
 import {AntDesign} from '@expo/vector-icons'
@@ -26,15 +26,10 @@ export default function RegisterScreen({navigation})  {
     const [_, setUser] = useContext(UserContext)
     
 
-    const DissmissKeyboard = ({children}) => (
-        <TouchableWithoutFeedback onPress = {() => Keyboard.dismiss()}>
-            {children}
-            </TouchableWithoutFeedback>
-    )
 
     const getPermissions = async () => {
         if (Platform.OS !== 'web') {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
             
             return status
         }
@@ -94,7 +89,7 @@ export default function RegisterScreen({navigation})  {
     }
 
     return (
-        <DissmissKeyboard>
+        
        <Container>
            <Main>
                <Text title semi center>
@@ -225,7 +220,7 @@ export default function RegisterScreen({navigation})  {
 
             <StatusBar barStyle = 'light-content' />
        </Container>
-       </DissmissKeyboard>
+       
     )
 }
 
