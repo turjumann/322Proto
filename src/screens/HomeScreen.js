@@ -1,15 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import styled from 'styled-components'
 import Text from '../components/Text'
-import { FirebaseContext } from '../context/FirebaseContext'
-import { UserContext } from '../context/UserContext'
 
 
-
-const [user, setUser] = useContext(UserContext)
-const firebase = useContext(FirebaseContext)
-const [userData, setUserData] = useState(null);
 
 export default HomeScreen = () => {
 

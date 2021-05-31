@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import { Alert } from 'react-native'
 import styled from 'styled-components'
 import Text from '../components/Text'
+import { StatusBar } from 'expo-status-bar';
 import { FirebaseContext } from '../context/FirebaseContext'
 import { UserContext } from '../context/UserContext'
 import { TouchableWithoutFeedback, Keyboard, View } from 'react-native'
@@ -106,7 +107,7 @@ export default function LoginScreen({navigation})  {
                 <LeftCircle />
             </HeaderGraphic>
 
-            <StatusBar barStyle = 'light-content' />
+            <StatusBar style = 'light' />
        </Container>
        </DissmissKeyboard>
     )
@@ -191,5 +192,3 @@ const LeftCircle = styled.View`
     left: -50px;
     top: -50px;
 `;
-
-const StatusBar = styled.StatusBar``;

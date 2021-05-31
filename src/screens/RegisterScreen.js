@@ -5,7 +5,7 @@ import Text from '../components/Text'
 import {AntDesign} from '@expo/vector-icons'
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
-
+import { StatusBar } from 'expo-status-bar';
 
 import { FirebaseContext } from '../context/FirebaseContext'
 import { UserContext } from '../context/UserContext'
@@ -218,7 +218,7 @@ export default function RegisterScreen({navigation})  {
                 <LeftCircle />
             </HeaderGraphic>
 
-            <StatusBar barStyle = 'light-content' />
+            <StatusBar style = 'light' />
        </Container>
        
     )
@@ -328,4 +328,4 @@ const LeftCircle = styled.View`
     top: -50px;
 `;
 
-const StatusBar = styled.StatusBar``;
+

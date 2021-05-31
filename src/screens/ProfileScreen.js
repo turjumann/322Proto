@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components'
-import {ScrollView, View, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard } from 'react-native'
+import {ScrollView, View, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard, ImageBackground } from 'react-native'
 import { UserContext } from '../context/UserContext'
 import { FirebaseContext } from '../context/FirebaseContext'
 import Text from '../components/Text'
+import { StatusBar } from 'expo-status-bar';
 
 
 
@@ -36,6 +37,8 @@ export default ProfileScreen = () => {
     return (
         <DissmissKeyboard>
         <Container>
+            
+        <StatusBar style = 'dark' />
             <ProfilePhotoContainer>
                 <ProfilePhoto source ={ 
                     user.ProfilePhotoUrl === 'default'
@@ -55,6 +58,7 @@ export default ProfileScreen = () => {
                             <ProfileField   
                                 value={userData ? userData.name : ''}
                                 placeholder = {user.name}
+                                autoCapitalize = 'words' 
                                 placeholderTextColor="#646464"
                                 onChangeText={(txt) => setUserData({...userData, name: txt})}
                             />
@@ -64,6 +68,7 @@ export default ProfileScreen = () => {
                         <ProfileTitle>Surname</ProfileTitle>
                             <ProfileField value={userData ? userData.surname : ''}
                                 placeholder = {user.surname}
+                                autoCapitalize = 'words' 
                                 placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, surname: txt})}
                                 />
@@ -83,6 +88,7 @@ export default ProfileScreen = () => {
                         <ProfileTitle>Previous Institution</ProfileTitle>
                             <ProfileField value={userData ? userData.prevInst : ''}
                                 placeholder = {user.prevInst}
+                                autoCapitalize = 'words' 
                                 placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, prevInst: txt})}
                                 />
@@ -93,6 +99,7 @@ export default ProfileScreen = () => {
                         <ProfileTitle>Country</ProfileTitle>
                             <ProfileField value={userData ? userData.country : ''}
                                 placeholder = {user.country}
+                                autoCapitalize = 'words' 
                                 placeholderTextColor="#646464"
                             onChangeText={(txt) => setUserData({...userData, country: txt})}
                                 />
@@ -127,7 +134,7 @@ const Container = styled.View`
 `
 
 const ProfilePhotoContainer = styled.View`
-    shadow-opacity: 0.8;
+    shadow-opacity: 0.5;
     shadow-radius: 30px;
     shadow-color: #222222;
     align-items: center;
@@ -175,7 +182,10 @@ const UpdateProfileContainer = styled.TouchableOpacity`
     justify-content: center;
     background-color: #222222;
     border-radius: 24px;
-    margin-top: 75px
+    margin-top: 75px;
+    shadow-opacity: 0.2;
+    shadow-radius: 30px;
+    shadow-color: #222222;
 `;
 
 const Loading = styled.ActivityIndicator.attrs(props => ({
