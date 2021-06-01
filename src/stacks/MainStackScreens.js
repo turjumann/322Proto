@@ -51,8 +51,8 @@ export default MainStackScreens = () => {
     }))
 
     return (
-        <MainStack.Navigator tabBarOptions = {tabBarOptions} screenOptions = {screenOptions}>
-            <MainStack.Screen name ="Profile" component = {ProfileScreen} />
+        <MainStack.Navigator  tabBarOptions = {tabBarOptions} screenOptions = {screenOptions}>
+            <MainStack.Screen name ="Profile"  component = {ProfileScreen} />
             <MainStack.Screen name ="Home" component = {HomeScreen} />
             <MainStack.Screen name ="Settings" component = {SettingsScreen} />
         </MainStack.Navigator>

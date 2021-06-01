@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components'
-import {ScrollView, View, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard, ImageBackground } from 'react-native'
+import {ScrollView, View, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard } from 'react-native'
 import { UserContext } from '../context/UserContext'
 import { FirebaseContext } from '../context/FirebaseContext'
 import Text from '../components/Text'

@@ -17,6 +17,7 @@ if(!firebase.apps.length) {
 
 }
 
+
 const db = firebase.firestore()
 
 const Firebase = {
@@ -164,7 +165,32 @@ const Firebase = {
 
     logIn: async (email, password) => {
         return firebase.auth().signInWithEmailAndPassword(email, password)
-    }
+    },
+
+    getRegisteredUsers: async (chats) => {
+
+        const db = firebase.firestore();
+
+        return  db
+          .collection('users')
+          .get()
+          .then(querySnapshot => {
+            console.log('Total users: ', querySnapshot.size);
+             let arr = []
+            querySnapshot.forEach(documentSnapshot => {
+                let newData = {
+                    id: documentSnapshot.id,
+                    name: documentSnapshot.data().name,
+                    surname: documentSnapshot.data().surname
+                  }
+                  arr = [...arr, newData]
+            });
+            console.log(arr)
+         return arr;
+          });
+    },
+
+    
 
     
 
