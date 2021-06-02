@@ -21,9 +21,9 @@ export default SettingsScreen = () => {
         
 
         if(loggedOut) {
-            console.log('Before @setUser')
+            
             setUser((state) => ({...state, isLoggedIn: false}))
-            console.log('After @setUser')
+           
         }
 
     }

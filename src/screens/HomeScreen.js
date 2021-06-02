@@ -13,11 +13,18 @@ import CustomListItem from '../components/CustomListItem'
 
 export default HomeScreen = ({navigation}) => {
 
+    
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerShown: false,
+            headerTitle: <Text title bold >Home</Text>,
 
+        })
+    })
     return (
         <SafeAreaView>
             <ScrollView>
-            <CustomListItem />
+            <CustomListItem navigation={navigation} />
             </ScrollView>
         </SafeAreaView>        
     )

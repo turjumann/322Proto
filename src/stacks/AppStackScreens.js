@@ -7,6 +7,8 @@ import {UserContext} from '../context/UserContext'
 import AuthStackScreens from './AuthStackScreens';
 import MainStackScreens from './MainStackScreens';
 import LoadingScreen from '../screens/LoadingScreen'
+import MessageScreen from '../screens/MessageScreen'
+
 
 export default AppStackScreens = () => {
     const [user] = useContext(UserContext)
@@ -16,18 +18,21 @@ export default AppStackScreens = () => {
 
     return (
 
-        <AppStack.Navigator headerMode = 'none'>
+        <AppStack.Navigator>
             
             {user.isLoggedIn === null ? (
-                <AppStack.Screen name = 'Loading' component = {LoadingScreen} />
+                <AppStack.Screen name = 'Loading' options={{headerShown: false}} component = {LoadingScreen} />
 
             ) : user.isLoggedIn ? (
 
-                <AppStack.Screen name = 'Main' component = {MainStackScreens} />
+                <AppStack.Screen name = 'Main' options={{headerShown: false}} component = {MainStackScreens} />
             ) : (
-                <AppStack.Screen name = 'Auth' component = {AuthStackScreens} />
+                <AppStack.Screen name = 'Auth' options={{headerShown: false}} component = {AuthStackScreens} />
             )
-            }
+        }
+        <AppStack.Screen name = 'Message' component = {MessageScreen}/> 
+            
+
         </AppStack.Navigator>
     )
 

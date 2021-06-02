@@ -1,4 +1,4 @@
-import React, {createContext } from 'react'
+import React, {createContext, useState } from 'react'
 
 
 import firebase from 'firebase'
@@ -9,6 +9,7 @@ import { Alert } from 'react-native'
 
 
 const FirebaseContext = createContext();
+
 
 
 if(!firebase.apps.length) {
@@ -167,28 +168,60 @@ const Firebase = {
         return firebase.auth().signInWithEmailAndPassword(email, password)
     },
 
-    getRegisteredUsers: async (chats) => {
-
+    getRegisteredUsers: async () => {
+        
         const db = firebase.firestore();
 
-        return  db
-          .collection('users')
-          .get()
-          .then(querySnapshot => {
-            console.log('Total users: ', querySnapshot.size);
-             let arr = []
-            querySnapshot.forEach(documentSnapshot => {
-                let newData = {
-                    id: documentSnapshot.id,
-                    name: documentSnapshot.data().name,
-                    surname: documentSnapshot.data().surname
-                  }
-                  arr = [...arr, newData]
-            });
-            console.log(arr)
-         return arr;
+        const currId = Firebase.getCurrentUser().uid
+        return await db
+        .collection('users')
+        .get()
+        .then(querySnapshot => {
+           let arr = []
+           
+          querySnapshot.forEach(documentSnapshot => {
+
+
+              let newData = {
+                  id: documentSnapshot.id,
+                  name: documentSnapshot.data().name,
+                  surname: documentSnapshot.data().surname
+                }
+                if (newData.id === currId){}
+                else{
+
+                    arr = [...arr, newData]
+                }
           });
+        return arr;
+        });
+        
     },
+
+    sendMessages: async (docId, myMsg) => {
+          db.collection('chatrooms')
+          .doc(docId)
+          .collection('messages')
+          .add({...myMsg, createdAt:firebase.firestore.FieldValue.serverTimestamp()})
+
+    },
+
+    getMessages: async (docId) => {
+        console.log(docId)
+        const querySnap = await firebase.firestore().collection('chatrooms')
+        .doc(docId)
+        .collection('messages')
+        .orderBy('createdAt', 'desc')
+        .get()
+        let arr2 = []
+        querySnap.forEach(docSnap => {
+            arr2 = [...arr2, { ...docSnap, createdAt:docSnap.data().createdAt.toDate() }]
+            
+        })
+        
+        return arr2
+        
+    }
 
     
 
