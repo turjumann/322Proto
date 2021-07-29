@@ -118,7 +118,7 @@ export default function RegisterScreen({navigation})  {
                         autoCapitalize = 'words' 
                         autoCorrect = {false} 
                         autoFocus = {false}
-                        onChangeText = {name => setName(name.trim())}
+                        onChangeText = {name => setName(name)}
                         value={name}
                    />
                </AuthContainer>
@@ -129,7 +129,7 @@ export default function RegisterScreen({navigation})  {
                         autoCapitalize = 'words' 
                         autoCorrect = {false} 
                         autoFocus = {false}
-                        onChangeText = {surname => setSurname(surname.trim())}
+                        onChangeText = {surname => setSurname(surname)}
                         value={surname}
                    />
                </AuthContainer>
@@ -141,7 +141,7 @@ export default function RegisterScreen({navigation})  {
                         autoCorrect = {false} 
                         autoFocus = {false}
                         keyboardType='numeric'
-                        onChangeText = {age => setAge(age.trim())}
+                        onChangeText = {age => setAge(age)}
                         value={age}
                    />
                </AuthContainer>

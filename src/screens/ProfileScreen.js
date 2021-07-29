@@ -40,11 +40,10 @@ export default ProfileScreen = () => {
             
         <StatusBar style = 'dark' />
             <ProfilePhotoContainer>
-                <ProfilePhoto source ={ 
-                    user.ProfilePhotoUrl === 'default'
-                    ? require('../../assets/images/logo.png')
-                    : { uri: user.profilePhotoUrl }
-                    } />
+                <ProfilePhoto source ={{ uri: user.profilePhotoUrl === 'default'
+                  ?'https://firebasestorage.googleapis.com/v0/b/cmse322.appspot.com/o/profilePhotos%2FFW6FissAKyRAMy80YZvyIm0lJbt2?alt=media&token=36a87151-298a-4d54-a447-869158e43ede'
+                  :user.profilePhotoUrl }}
+                     />
             </ProfilePhotoContainer>
             <Text medium bold center margin ='16px 0 32px 0'>
                 {userData ? userData.name : user.name}<Text medium center bold margin ='16px 0 32px 0'>{userData ? userData.surname : user.surname}</Text>

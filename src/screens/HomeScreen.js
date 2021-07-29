@@ -18,14 +18,15 @@ export default HomeScreen = ({navigation}) => {
         navigation.setOptions({
             headerShown: false,
             headerTitle: <Text title bold >Home</Text>,
+            
 
         })
     })
     return (
-        <SafeAreaView>
-            <ScrollView>
+        <SafeAreaView style={{backgroundColor: 'white'}}>
+            <View style={{backgroundColor: 'white'}}>
             <CustomListItem navigation={navigation} />
-            </ScrollView>
+            </View>
         </SafeAreaView>        
     )
 }

@@ -50,9 +50,9 @@ const Firebase = {
             if (user.profilePhoto) {
                 profilePhotoUrl = await Firebase.uploadProfilePhoto(user.profilePhoto)
             }
-
             delete user.password
-                return {...user, profilePhotoUrl, uid}
+            return {...user, profilePhotoUrl, uid}
+
             
 
         } catch(error){
@@ -185,13 +185,15 @@ const Firebase = {
               let newData = {
                   id: documentSnapshot.id,
                   name: documentSnapshot.data().name,
-                  surname: documentSnapshot.data().surname
+                  surname: documentSnapshot.data().surname,
+                  profilePhoto: documentSnapshot.data().profilePhotoUrl,
                 }
                 if (newData.id === currId){}
                 else{
 
                     arr = [...arr, newData]
                 }
+                
           });
         return arr;
         });
@@ -206,24 +208,7 @@ const Firebase = {
 
     },
 
-    getMessages: async (docId) => {
-        console.log(docId)
-        const querySnap = await firebase.firestore().collection('chatrooms')
-        .doc(docId)
-        .collection('messages')
-        .orderBy('createdAt', 'desc')
-        .get()
-        let arr2 = []
-        querySnap.forEach(docSnap => {
-            arr2 = [...arr2, { ...docSnap, createdAt:docSnap.data().createdAt.toDate() }]
-            
-        })
-        
-        return arr2
-        
-    }
 
-    
 
     
 

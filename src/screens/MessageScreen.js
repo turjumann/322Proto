@@ -58,7 +58,7 @@ export default MessageScreen = ({route, navigation}) => {
         .collection('messages')
         .orderBy('createdAt',"desc")
 
-        console.log(docId)
+        
       const unSubscribe =  messageRef.onSnapshot((querySnap)=>{
             const allmsg =   querySnap.docs.map(docSanp=>{
              const data = docSanp.data()
